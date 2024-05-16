@@ -24,39 +24,92 @@ enum layers {
     MAC_FN,
 };
 
+enum combos {
+  FS_V,
+  FD_G,
+  RE_Y,
+  ET_W,
+  DS_C,
+  NM_H,
+  NL_B,
+  UI_K,
+  IO_J,
+  ML_Z,
+  FE_BS,
+  FDS_ENTER,
+  NI_DEL,
+  LX_ESC,
+  FQ_DEL
+};
+
+const uint16_t PROGMEM fs_combo[] = {KC_F, KC_S, COMBO_END};
+const uint16_t PROGMEM fd_combo[] = {KC_F, KC_D, COMBO_END};
+const uint16_t PROGMEM re_combo[] = {KC_R, KC_E, COMBO_END};
+const uint16_t PROGMEM et_combo[] = {KC_E, KC_T, COMBO_END};
+const uint16_t PROGMEM ds_combo[] = {KC_D, KC_S, COMBO_END};
+const uint16_t PROGMEM nm_combo[] = {KC_N, KC_M, COMBO_END};
+const uint16_t PROGMEM nl_combo[] = {KC_N, KC_L, COMBO_END};
+const uint16_t PROGMEM ui_combo[] = {KC_U, KC_I, COMBO_END};
+const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM ml_combo[] = {KC_M, KC_L, COMBO_END};
+const uint16_t PROGMEM fe_combo[] = {KC_F, KC_E, COMBO_END};
+const uint16_t PROGMEM fds_combo[] = {KC_F, KC_D, KC_S, COMBO_END};
+const uint16_t PROGMEM ni_combo[] = {KC_N, KC_I, COMBO_END};
+const uint16_t PROGMEM lx_combo[] = {KC_L, KC_X, COMBO_END};
+const uint16_t PROGMEM fq_combo[] = {KC_F, KC_Q, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [FS_V] = COMBO(fs_combo, KC_V),
+  [FD_G] = COMBO(fd_combo, KC_G),
+  [RE_Y] = COMBO(re_combo, KC_Y),
+  [ET_W] = COMBO(et_combo, KC_W),
+  [DS_C] = COMBO(ds_combo, KC_C),
+  [NM_H] = COMBO(nm_combo, KC_H),
+  [NL_B] = COMBO(nl_combo, KC_B),
+  [UI_K] = COMBO(ui_combo, KC_K),
+  [IO_J] = COMBO(io_combo, KC_J),
+  [ML_Z] = COMBO(ml_combo, KC_Z),
+  [FE_BS] = COMBO(fe_combo, KC_BSPC),
+  [FDS_ENTER] = COMBO(fds_combo, KC_ENT),
+  [NI_DEL] = COMBO(ni_combo, KC_DEL),
+  [LX_ESC] = COMBO(lx_combo, KC_ESC),
+  [FQ_DEL] = COMBO(fq_combo, KC_DEL)
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [WIN_BASE] = LAYOUT_tkl_ansi(
         KC_ESC,             KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,     KC_F12,   KC_PSCR,  KC_SCRL,  KC_PAUS,
-        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,     KC_BSPC,  KC_INS,   KC_HOME,  KC_PGUP,
-        KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,    KC_BSLS,  KC_DEL,   KC_END,   KC_PGDN,
-        KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,              KC_ENT,
-        KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,            KC_UP,
-        KC_LCTL,  KC_LWIN,  KC_LALT,                                KC_SPC,                                 KC_RALT,  MO(WIN_FN),KC_APP,    KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
+        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_QUOT,  KC_EQL,     KC_BSPC,  KC_INS,   KC_HOME,  KC_PGUP,
+        KC_TAB,   KC_Q,     KC_T,     KC_E,     KC_R,     KC_SLSH,     S(KC_MINS),     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,    KC_BSLS,  KC_DEL,   KC_END,   KC_PGDN,
+        CTL_T(KC_DEL),  KC_A,     KC_S,     KC_D,     KC_F,     KC_COMM,     KC_DOT,     KC_N,     KC_M,     KC_L,     LT(MAC_BASE, KC_X),  KC_QUOT,              KC_ENT,
+        KC_LSFT,            KC_PGDN,     KC_HOME,     KC_LEFT,     KC_DOWN,     KC_SCLN,     KC_UP,     KC_RGHT,     KC_END,  KC_PGUP,   LT(MAC_FN, KC_F12),              KC_RSFT,            KC_UP,
+        KC_CAPS,  KC_LWIN,  KC_LALT,                                KC_SPC,                                 KC_RALT,  MO(WIN_FN),KC_APP,    KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [WIN_FN] = LAYOUT_tkl_ansi(
         _______,            KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  BL_DOWN,  BL_UP,    KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,  KC_CRTA,  BL_STEP,
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,  _______,  _______,
-        BL_TOGG,  BL_STEP,  BL_UP,    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,  _______,  _______,
-        KC_OSSW,  _______,  BL_DOWN,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,              _______,
-        _______,            _______,  _______,  _______,  _______,  _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,            _______,
-        _______,  GU_TOGG,  _______,                                _______,                                _______,  _______,  _______,    _______,  _______,  _______,  _______),
+        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,  _______,  NK_TOGG,
+        BL_TOGG,  BL_STEP,  KC_WH_D,    KC_MS_U,  KC_WH_U,  _______,  _______,  _______,  KC_BTN3,  KC_BTN5,  KC_BTN4,  _______,  _______,    _______,  _______,  KC_OSSW,  QK_BOOT,
+        _______,  _______,  KC_MS_L,  KC_MS_D,  KC_MS_R,  _______,  _______,  KC_BTN1,  KC_BTN2,  KC_ACL1,  KC_ACL2,  _______,              _______,
+        _______,            _______,  KC_WH_L,  KC_WH_R,  _______,  _______,  _______,  _______,  _______,  _______,  _______,              _______,            _______,
+        _______,  GU_TOGG,  _______,                                KC_ACL0,                                _______,  _______,  _______,    _______,  _______,  _______,  _______),
 
 	 [MAC_BASE] = LAYOUT_tkl_ansi(
-        KC_ESC,             KC_BRID,  KC_BRIU,  KC_MICT,  KC_LAPA,  BL_DOWN,  BL_UP,    KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  KC_SNAP,  KC_TRNS,  KC_PAUS,
-        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,     KC_BSPC,  KC_INS,   KC_HOME,  KC_PGUP,
-        KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,    KC_BSLS,  KC_DEL,   KC_END,   KC_PGDN,
-        KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,              KC_ENT,
-        KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,            KC_UP,
-        KC_LCTL,  KC_LOPTN, KC_LCMMD,                               KC_SPC,                                 KC_RCMMD, MO(MAC_FN),KC_TRNS,   KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
+        _______,             _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,  _______,  _______,  _______,    _______,  _______,  _______,  _______,
+        _______,   _______,     _______,     _______,     _______,     _______,     _______,     _______,     _______,     _______,     _______,     _______,  _______,     _______,  _______,   _______,  _______,
+        _______,   S(KC_5),     S(KC_6),     S(KC_7),     S(KC_8),     _______,     _______,     S(KC_QUOT),     S(KC_EQL),     KC_MINS,     _______,     _______,  _______,    _______,  _______,   KC_OSSW,   _______,
+        _______,  S(KC_1),     S(KC_2),     S(KC_3),     S(KC_4),     _______,     _______,     S(KC_9),     S(KC_0),     S(KC_BSLS),     _______,  _______,              _______,
+        _______,            _______,     KC_QUOT,     S(KC_LBRC),     KC_LBRC,     KC_EQL,     KC_RBRC,     S(KC_RBRC),     KC_BSLS,  _______,   _______,              _______,            _______,
+        _______,  _______, _______,                               _______,                                 _______, _______,_______,   _______,  _______,  _______,  _______),
 
     [MAC_FN] = LAYOUT_tkl_ansi(
         _______,            KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,     KC_F12,   _______,  KC_SIRI,  BL_STEP,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,  _______,  _______,
-        BL_TOGG,  BL_STEP,  BL_UP,    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,  _______,  _______,
-        KC_OSSW,  _______,  BL_DOWN,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,              _______,
-        _______,            _______,  _______,  _______,  _______,  _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,            _______,
+        _______,  _______,  KC_F3,    KC_F5,  KC_F8,  _______,  _______,  _______,  KC_F6,  KC_F7,  _______,  _______,  _______,    _______,  _______,  KC_OSSW,  QK_BOOT,
+        _______,  KC_F12,  KC_F11,  KC_F10,  KC_F9,  _______,  _______,  _______,  KC_F1,  KC_F2,  KC_F4,  _______,              _______,
+        _______,            _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,              _______,            _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,  _______,    _______,  _______,  _______,  _______),
+
 };
 
 // clang-format on
@@ -70,3 +123,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+
+
+// [MAC_BASE] = LAYOUT_tkl_ansi(
+//         KC_ESC,             KC_BRID,  KC_BRIU,  KC_MICT,  KC_LAPA,  BL_DOWN,  BL_UP,    KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  KC_SNAP,  KC_TRNS,  KC_PAUS,
+//         KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,     KC_BSPC,  KC_INS,   KC_HOME,  KC_PGUP,
+//         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,    KC_BSLS,  KC_DEL,   KC_END,   KC_PGDN,
+//         KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,              KC_ENT,
+//         KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,            KC_UP,
+//         KC_LCTL,  KC_LOPTN, KC_LCMMD,                               KC_SPC,                                 KC_RCMMD, MO(MAC_FN),KC_TRNS,   KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),

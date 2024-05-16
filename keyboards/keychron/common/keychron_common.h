@@ -43,6 +43,11 @@ enum custom_keycodes {
 #define KC_SNAP KC_SCREEN_SHOT
 #define KC_CRTA KC_CORTANA
 
+#define MK_COMBINED
+
+#define FORCE_NKRO
+#define COMBO_COUNT 15
+
 typedef struct PACKED {
     uint8_t len;
     uint8_t keycode[3];

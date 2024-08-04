@@ -6,7 +6,8 @@
 // Good defaults for home row modifiers
 #define TAPPING_TERM 230
 #define FORCE_NKRO
-#define COMBO_COUNT 15
+
+#define DYNAMIC_KEYMAP_LAYER_COUNT 8
 
 // Handle master/slave detection on low cost Promicro
 #ifdef __AVR__

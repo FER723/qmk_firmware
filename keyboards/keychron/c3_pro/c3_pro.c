@@ -21,10 +21,10 @@ static uint8_t  os_switch_indicate_count = 0;
 static uint8_t  led_toggle_count         = 5;
 
 void keyboard_post_init_kb(void) {
-    gpio_set_pin_output(LED_MAC_OS_PIN);
-    gpio_set_pin_output(LED_WIN_OS_PIN);
-    gpio_write_pin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
-    gpio_write_pin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
+    // gpio_set_pin_output(LED_MAC_OS_PIN);
+    // gpio_set_pin_output(LED_WIN_OS_PIN);
+    // gpio_write_pin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
+    // gpio_write_pin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
 
     layer_state_t last_layer = eeconfig_read_default_layer();
     if (last_layer) {
@@ -49,14 +49,14 @@ void eeconfig_init_kb(void) {
 }
 
 void housekeeping_task_kb(void) {
-    if (default_layer_state == (1U << 0)) {
-        gpio_write_pin(LED_MAC_OS_PIN, LED_OS_PIN_ON_STATE);
-        gpio_write_pin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
-    }
-    if (default_layer_state == (1U << 2)) {
-        gpio_write_pin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
-        gpio_write_pin(LED_WIN_OS_PIN, LED_OS_PIN_ON_STATE);
-    }
+    // if (default_layer_state == (1U << 0)) {
+    //     gpio_write_pin(LED_MAC_OS_PIN, LED_OS_PIN_ON_STATE);
+    //     gpio_write_pin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
+    // }
+    // if (default_layer_state == (1U << 2)) {
+    //     gpio_write_pin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
+    //     gpio_write_pin(LED_WIN_OS_PIN, LED_OS_PIN_ON_STATE);
+    // }
 
     if (os_switch_timer_buffer && timer_elapsed32(os_switch_timer_buffer) > 300) {
         if (os_switch_indicate_count++ > led_toggle_count) {

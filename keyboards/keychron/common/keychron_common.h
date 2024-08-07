@@ -46,7 +46,7 @@ enum custom_keycodes {
 #define MK_COMBINED
 
 #define FORCE_NKRO
-#define COMBO_COUNT 30
+#define COMBO_COUNT 2
 
 typedef struct PACKED {
     uint8_t len;
